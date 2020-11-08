@@ -1,4 +1,4 @@
-const dataBase = require('../db/index')
+const dataBase = require('./db/index')
 
 const users = dataBase.map(user => ({
     name: user.name,

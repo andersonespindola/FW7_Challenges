@@ -1,4 +1,4 @@
-const dataBase = require('../db/index')
+const dataBase = require('./db/index')
 
 const sortArray = dataBase.map(array => ({
     nome: array.name,
