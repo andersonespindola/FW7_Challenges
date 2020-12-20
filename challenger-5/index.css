@@ -1,0 +1,92 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.leftSide {
+  display: flex;
+  position: relative;
+  width: 60%;
+  align-items: center;
+  min-width: 518px;
+}
+
+.title {
+  position: absolute;
+  color: #ffffff;
+  font-size: 90px;
+  width: 450px;
+  font-weight: bold;
+  margin-left: 10%;
+}
+
+.rightSide {
+  position: relative;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 430px;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.social {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.form {
+  color: dimgrey;
+  margin-top: 30px;
+}
+
+.input {
+  border-radius: 20px;
+  height: 25px;
+  width: 380px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+}
+
+.recovery {
+  float: right;
+}
+
+.checkbox {
+  width: 1.3em;
+  height: 1.3em;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+
+.checkbox:hover {
+  background-color: #d3d5d6;
+}
+
+.button {
+  background-color: #8364f1;
+  border-radius: 20px;
+  width: 200px;
+  height: 40px;
+  border: 1px solid #ddd;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+}
