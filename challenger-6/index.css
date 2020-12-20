@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
+
 body,
 html {
   margin: 0;
@@ -21,6 +23,7 @@ html {
   width: 90%;
   text-align: right;
   font-size: 22px;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .logo {
@@ -31,6 +34,10 @@ html {
 
 .nav > a {
   margin-right: 15px;
+}
+
+.nav > a:hover {
+  cursor: pointer;
 }
 
 .moonImage {
@@ -49,4 +56,32 @@ html {
 .moonImage > img {
   width: 40vw;
   height: auto;
+}
+
+.texts {
+  font-weight: bold;
+  color: #ffffff;
+  margin-top: 17px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.texts.title {
+  font-size: 33px;
+}
+
+.button {
+  background-color: #6754fb;
+  border-radius: 11px;
+  width: 200px;
+  height: 40px;
+  border: 1px solid #6754fb;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+.button:hover {
+  background-color: #8364f1;
+  cursor: pointer;
 }
