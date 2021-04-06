@@ -1,0 +1,5 @@
+.background {
+  background-color: #be62f3;
+  min-height: 100vh;
+  font-size: calc(10px + 2vmin);
+}
