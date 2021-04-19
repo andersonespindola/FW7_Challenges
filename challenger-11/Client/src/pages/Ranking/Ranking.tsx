@@ -1,5 +1,10 @@
 import React from 'react'
+import { ScoreTable } from '../../components/ScoreTable'
 
 export const Ranking: React.FC = () => {
-  return <h1>Ranking</h1>
+  return (
+    <div className="background">
+      <ScoreTable />
+    </div>
+  )
 }

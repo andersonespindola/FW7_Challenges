@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Container, LinearProgress } from '@material-ui/core'
+import { Container, Grid, LinearProgress } from '@material-ui/core'
 import { useHistory } from 'react-router'
 
-export interface Props {
-  finish: Function
+const finish = (history: any) => {
+  history.push('/score')
 }
 
-const Counter: React.FC<Props> = ({ finish }) => {
+const Counter: React.FC = () => {
+  const TIMETOPLAY = 15
   const MIN = 0
-  const MAX = 60
+  const MAX = TIMETOPLAY
 
-  const [seconds, setSeconds] = useState(5)
+  const [seconds, setSeconds] = useState(TIMETOPLAY)
 
   const normalize = (value: number) => ((value - MIN) * 100) / (MAX - MIN)
 
@@ -20,8 +21,7 @@ const Counter: React.FC<Props> = ({ finish }) => {
     const interval = setInterval(() => {
       if (seconds <= 0) {
         clearInterval(interval)
-        finish(history)
-        return
+        return finish(history)
       }
       setSeconds(seconds - 1)
     }, 1000)
@@ -29,10 +29,16 @@ const Counter: React.FC<Props> = ({ finish }) => {
   })
 
   return (
-    <Container>
-      <div>Tempo restante: {seconds}</div>
-      <LinearProgress variant="determinate" value={normalize(seconds)} />
-    </Container>
+    <Grid item xs={12} sm={6} className="counter">
+      <Container>
+        <div className="time-left">Tempo restante: {seconds}</div>
+        <LinearProgress
+          variant="determinate"
+          color="secondary"
+          value={normalize(seconds)}
+        />
+      </Container>
+    </Grid>
   )
 }
 
