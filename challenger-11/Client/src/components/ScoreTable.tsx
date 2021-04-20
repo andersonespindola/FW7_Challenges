@@ -13,6 +13,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import axios from 'axios'
+import { Player } from '../model/Player'
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -38,19 +39,24 @@ const StyledTableRow = withStyles((theme: Theme) =>
   })
 )(TableRow)
 
-const createRankingData = async () => {
-  const response = await axios.get('http://localhost:4000/player')
-
-  const rankingPlayers = response.data
-  // const normalizedPlayer = rankingPlayers.data
-  //   ? rankingPlayers.data.map((player: object) => player._doc)
-  //   : []
-  console.log({ rankingPlayers })
-}
-
 function createData(name: string, score: number, fails: number) {
   return { name, score, fails }
 }
+
+const createRankingData = async () => {
+  const response = await axios.get('http://localhost:4000/player')
+
+  if (!response.data) return []
+
+  const rankingPlayers = response.data.map((player: Player) => {
+    const { name, score, fails } = player
+    return { name, score, fails }
+  })
+
+  console.log({ rankingPlayers })
+}
+
+createRankingData()
 
 const rows = [
   createData('Frozen yoghurt', 159, 20),
@@ -67,8 +73,6 @@ const useStyles = makeStyles({
 
 export const ScoreTable = () => {
   const classes = useStyles()
-
-  createRankingData()
 
   return (
     <TableContainer
