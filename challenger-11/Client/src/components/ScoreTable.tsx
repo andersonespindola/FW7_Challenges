@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   withStyles,
   Theme,
@@ -39,32 +39,6 @@ const StyledTableRow = withStyles((theme: Theme) =>
   })
 )(TableRow)
 
-function createData(name: string, score: number, fails: number) {
-  return { name, score, fails }
-}
-
-const createRankingData = async () => {
-  const response = await axios.get('http://localhost:4000/player')
-
-  if (!response.data) return []
-
-  const rankingPlayers = response.data.map((player: Player) => {
-    const { name, score, fails } = player
-    return { name, score, fails }
-  })
-
-  console.log({ rankingPlayers })
-}
-
-createRankingData()
-
-const rows = [
-  createData('Frozen yoghurt', 159, 20),
-  createData('Ice cream sandwich', 237, 20),
-  createData('Eclair', 262, 15),
-  createData('Gingerbread', 50, 26)
-]
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700
@@ -73,6 +47,44 @@ const useStyles = makeStyles({
 
 export const ScoreTable = () => {
   const classes = useStyles()
+
+  const [rows, setRows] = useState([])
+
+  useEffect(() => {
+    const createRankingData = async () => {
+      const response = await axios.get('http://localhost:4000/player')
+
+      if (!response.data) return []
+
+      const data = response.data.map((player: Player) => {
+        const { name, score, fails } = player
+        return { name, score, fails }
+      })
+
+      setRows(data)
+    }
+
+    createRankingData()
+  }, [])
+
+  const constructRows = rows.length ? (
+    rows.map((row: Player, index: number) => (
+      <StyledTableRow key={index}>
+        <StyledTableCell>{index + 1}</StyledTableCell>
+        <StyledTableCell component="th" scope="row">
+          {row.name}
+        </StyledTableCell>
+        <StyledTableCell>{row.score}</StyledTableCell>
+        <StyledTableCell>{row.fails}</StyledTableCell>
+      </StyledTableRow>
+    ))
+  ) : (
+    <StyledTableRow>
+      <StyledTableCell colSpan={4}>
+        Não foram encontrados registros
+      </StyledTableCell>
+    </StyledTableRow>
+  )
 
   return (
     <TableContainer
@@ -88,18 +100,7 @@ export const ScoreTable = () => {
             <StyledTableCell>Falhas</StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {rows.map((row, index) => (
-            <StyledTableRow key={index}>
-              <StyledTableCell>{index + 1}</StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell>{row.score}</StyledTableCell>
-              <StyledTableCell>{row.fails}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
+        <TableBody>{constructRows}</TableBody>
       </Table>
     </TableContainer>
   )

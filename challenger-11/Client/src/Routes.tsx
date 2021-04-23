@@ -15,8 +15,8 @@ export function Routes() {
     <Router>
       <Switch>
         <GeneratorContext>
-          <Route path="/game" component={Game} />
           <Route path="/" exact component={Home} />
+          <Route path="/game" component={Game} />
           <Route path="/score" component={Score} />
           <Route path="/ranking" component={Ranking} />
         </GeneratorContext>

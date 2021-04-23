@@ -8,13 +8,15 @@ export interface Props {
   text: string
 }
 
+const getIconButton = (text: string) => {
+  if (text === 'Jogar') return <SportsEsportsIcon style={{ marginRight: 5 }} />
+  if (text === 'Ranking')
+    return <StarIcon style={{ marginRight: 5 }}></StarIcon>
+  if (text === 'Menu') return <StarIcon style={{ marginRight: 5 }}></StarIcon>
+}
+
 const Button: React.FC<Props> = ({ text }) => {
-  const buttonIcon =
-    text === 'Jogar' ? (
-      <SportsEsportsIcon style={{ marginRight: 5 }} />
-    ) : (
-      <StarIcon style={{ marginRight: 5 }}></StarIcon>
-    )
+  const buttonIcon = getIconButton(text)
 
   return (
     <div style={{ marginBottom: 10 }}>

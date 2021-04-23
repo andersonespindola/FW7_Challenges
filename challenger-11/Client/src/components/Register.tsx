@@ -33,15 +33,9 @@ const useStyles = makeStyles({
   }
 })
 
-const saveScore = async (
-  history: any,
-  playerName: string,
-  hits: number,
-  errors: number
-) => {
+const saveScore = async (playerName: string, hits: number, errors: number) => {
   const data = { name: playerName, score: hits, fails: errors }
   await axios.post('http://localhost:4000/player', data)
-  history.push('/ranking')
 }
 
 export const Register: React.FC = () => {
@@ -81,7 +75,10 @@ export const Register: React.FC = () => {
           <Button
             size="small"
             color="primary"
-            onClick={() => saveScore(history, playerName, hits, errors)}
+            onClick={async () => {
+              await saveScore(playerName, hits, errors)
+              history.push('/ranking')
+            }}
           >
             Adicionar
           </Button>

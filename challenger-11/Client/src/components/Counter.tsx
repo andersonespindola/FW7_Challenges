@@ -2,12 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Container, Grid, LinearProgress } from '@material-ui/core'
 import { useHistory } from 'react-router'
 
-const finish = (history: any) => {
-  history.push('/score')
-}
-
 const Counter: React.FC = () => {
-  const TIMETOPLAY = 15
+  const TIMETOPLAY = 60
   const MIN = 0
   const MAX = TIMETOPLAY
 
@@ -21,7 +17,7 @@ const Counter: React.FC = () => {
     const interval = setInterval(() => {
       if (seconds <= 0) {
         clearInterval(interval)
-        return finish(history)
+        return history.push('/score')
       }
       setSeconds(seconds - 1)
     }, 1000)
